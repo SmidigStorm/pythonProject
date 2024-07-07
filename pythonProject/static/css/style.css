@@ -116,7 +116,7 @@ li {
 }
 
 .health {
-    height: 20px;
+    height: 40px;
     background-color: #4caf50;
     width: 100%; /* Initial width to be set dynamically */
 }
@@ -137,4 +137,18 @@ li {
     padding: 10px;
     max-height: 300px;
     overflow-y: auto;
+}
+
+.cooldown-bar {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.cooldown {
+    height: 20px;
+    background-color: #000000;
+    width: 0%; /* Initial width to be set dynamically */
 }
