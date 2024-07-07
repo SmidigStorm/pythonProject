@@ -2,16 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-
-# Configure the SQLite database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///monsters.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Initialize the database
 db = SQLAlchemy(app)
 
 
-# Define the Monster model
 class Monster(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -25,7 +20,6 @@ class Monster(db.Model):
         return f'<Monster {self.name}>'
 
 
-# Create the database tables
 with app.app_context():
     db.create_all()
 
@@ -35,9 +29,6 @@ def index():
     monsters = Monster.query.all()
     return render_template('index.html', monsters=monsters)
 
-@app.route('/battle')
-def battle():
-    return render_template('battle.html')
 
 @app.route('/create_monster', methods=['GET', 'POST'])
 def create_monster():
@@ -49,7 +40,6 @@ def create_monster():
         active_ability = request.form['active_ability']
         passive_ability = request.form['passive_ability']
 
-        # Create a new monster
         new_monster = Monster(
             name=name,
             health=health,
@@ -59,13 +49,30 @@ def create_monster():
             passive_ability=passive_ability
         )
 
-        # Add the monster to the database
         db.session.add(new_monster)
         db.session.commit()
 
         return redirect(url_for('index'))
 
     return render_template('create_monster.html')
+
+
+@app.route('/choose_monsters', methods=['GET', 'POST'])
+def choose_monsters():
+    monsters = Monster.query.all()
+    if request.method == 'POST':
+        monster1_id = request.form['monster1']
+        monster2_id = request.form['monster2']
+        return redirect(url_for('battle', monster1_id=monster1_id, monster2_id=monster2_id))
+
+    return render_template('choose_monsters.html', monsters=monsters)
+
+
+@app.route('/battle/<int:monster1_id>/<int:monster2_id>')
+def battle(monster1_id, monster2_id):
+    monster1 = Monster.query.get_or_404(monster1_id)
+    monster2 = Monster.query.get_or_404(monster2_id)
+    return render_template('battle.html', monster1=monster1, monster2=monster2)
 
 
 if __name__ == '__main__':

@@ -13,25 +13,37 @@
 
         <div class="battle-visuals">
             <div class="monster-visual">
-                <img id="monster1-img" src="{{ url_for('static', filename='images/monster1.png') }}" alt="Monster 1">
                 <div class="health-bar">
-                    <div id="monster1-health" class="health"></div>
+                    <div id="monster1-health" class="health"
+                         data-health="{{ monster1.health }}"
+                         data-attack="{{ monster1.attack }}"
+                         data-defense="{{ monster1.defense }}"></div>
                 </div>
+                <h2>{{ monster1.name }}</h2>
+                <p>Health: {{ monster1.health }}</p>
+                <p>Attack: {{ monster1.attack }}</p>
+                <p>Defense: {{ monster1.defense }}</p>
             </div>
             <div class="monster-visual">
-                <img id="monster2-img" src="{{ url_for('static', filename='images/monster2.png') }}" alt="Monster 2">
                 <div class="health-bar">
-                    <div id="monster2-health" class="health"></div>
+                    <div id="monster2-health" class="health"
+                         data-health="{{ monster2.health }}"
+                         data-attack="{{ monster2.attack }}"
+                         data-defense="{{ monster2.defense }}"></div>
                 </div>
+                <h2>{{ monster2.name }}</h2>
+                <p>Health: {{ monster2.health }}</p>
+                <p>Attack: {{ monster2.attack }}</p>
+                <p>Defense: {{ monster2.defense }}</p>
             </div>
         </div>
 
         <div class="battle-logs">
             <div id="battle-log-monster1" class="battle-log">
-                <h2>Monster 1 Actions</h2>
+                <h2>{{ monster1.name }} Actions</h2>
             </div>
             <div id="battle-log-monster2" class="battle-log">
-                <h2>Monster 2 Actions</h2>
+                <h2>{{ monster2.name }} Actions</h2>
             </div>
         </div>
 

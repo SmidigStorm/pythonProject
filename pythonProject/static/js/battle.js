@@ -5,31 +5,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const healthBarMonster1 = document.getElementById('monster1-health');
     const healthBarMonster2 = document.getElementById('monster2-health');
 
+    const monster1 = {
+        name: document.querySelector('.monster-visual:nth-of-type(1) h2').innerText,
+        health: parseInt(healthBarMonster1.getAttribute('data-health')),
+        maxHealth: parseInt(healthBarMonster1.getAttribute('data-health')),
+        attack: parseInt(healthBarMonster1.getAttribute('data-attack')),
+        defense: parseInt(healthBarMonster1.getAttribute('data-defense')),
+        attackTimer: 1000 // 1 second
+    };
+
+    const monster2 = {
+        name: document.querySelector('.monster-visual:nth-of-type(2) h2').innerText,
+        health: parseInt(healthBarMonster2.getAttribute('data-health')),
+        maxHealth: parseInt(healthBarMonster2.getAttribute('data-health')),
+        attack: parseInt(healthBarMonster2.getAttribute('data-attack')),
+        defense: parseInt(healthBarMonster2.getAttribute('data-defense')),
+        attackTimer: 1000 // 1 second
+    };
+
     startBattleButton.addEventListener('click', startBattle);
 
     function startBattle() {
-        // Mock data for two monsters, this would be replaced by real data from your server
-        const monster1 = {
-            name: 'Monster 1',
-            health: 100,
-            maxHealth: 100,
-            attack: 15,
-            defense: 5,
-            attackTimer: 1000 // 1 second
-        };
-
-        const monster2 = {
-            name: 'Monster 2',
-            health: 120,
-            maxHealth: 120,
-            attack: 10,
-            defense: 3,
-            attackTimer: 1000 // 1 second
-        };
-
         // Clear previous battle logs
-        battleLogMonster1.innerHTML = '<h2>Monster 1 Actions</h2>';
-        battleLogMonster2.innerHTML = '<h2>Monster 2 Actions</h2>';
+        battleLogMonster1.innerHTML = `<h2>${monster1.name} Actions</h2>`;
+        battleLogMonster2.innerHTML = `<h2>${monster2.name} Actions</h2>`;
 
         // Initialize health bars
         updateHealthBar(monster1, healthBarMonster1);

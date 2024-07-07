@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Monsters</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Choose Your Monsters</h1>
+        <form method="POST" action="{{ url_for('choose_monsters') }}">
+            <label for="monster1">Choose Monster 1:</label>
+            <select name="monster1" required>
+                {% for monster in monsters %}
+                    <option value="{{ monster.id }}">{{ monster.name }} - Health: {{ monster.health }}, Attack: {{ monster.attack }}, Defense: {{ monster.defense }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <label for="monster2">Choose Monster 2:</label>
+            <select name="monster2" required>
+                {% for monster in monsters %}
+                    <option value="{{ monster.id }}">{{ monster.name }} - Health: {{ monster.health }}, Attack: {{ monster.attack }}, Defense: {{ monster.defense }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <button type="submit">Start Battle</button>
+        </form>
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+</body>
+</html>
