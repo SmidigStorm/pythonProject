@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         maxHealth: parseInt(healthBarMonster1.getAttribute('data-health')),
         attack: parseInt(healthBarMonster1.getAttribute('data-attack')),
         defense: parseInt(healthBarMonster1.getAttribute('data-defense')),
-        attackTimer: 1000 // 1 second
+        attackTimer: 250
     };
 
     const monster2 = {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         maxHealth: parseInt(healthBarMonster2.getAttribute('data-health')),
         attack: parseInt(healthBarMonster2.getAttribute('data-attack')),
         defense: parseInt(healthBarMonster2.getAttribute('data-defense')),
-        attackTimer: 1000 // 1 second
+        attackTimer: 250
     };
 
     startBattleButton.addEventListener('click', startBattle);
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function attack(attacker, defender, logElement, healthBar) {
-        const damage = Math.max(attacker.attack - defender.defense, 0);
+        const damage = Math.max(attacker.attack - defender.defense, 1);
         defender.health -= damage;
         updateHealthBar(defender, healthBar);
         logElement.innerHTML += `<p>${attacker.name} attacks ${defender.name} for ${damage} damage. ${defender.name} health: ${defender.health}</p>`;

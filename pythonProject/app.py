@@ -21,7 +21,23 @@ class Monster(db.Model):
 
 
 with app.app_context():
+    db.drop_all()
     db.create_all()
+
+    monsters = [
+        Monster(name='Aqua', health=120, attack=10, defense=5, active_ability='Tsunami', passive_ability='Heal Over Time'),
+        Monster(name='Blaze', health=100, attack=15, defense=3, active_ability='Flame Burst', passive_ability='Burn'),
+        Monster(name='Flora', health=130, attack=8, defense=7, active_ability='Vine Whip', passive_ability='Regenerate'),
+        Monster(name='Spark', health=110, attack=12, defense=4, active_ability='Thunder Strike', passive_ability='Electric Shield'),
+        Monster(name='Boulder', health=150, attack=8, defense=10, active_ability='Earthquake', passive_ability='Rock Armor'),
+        Monster(name='Zephyr', health=90, attack=14, defense=5, active_ability='Gale Force', passive_ability='Wind Barrier'),
+        Monster(name='Frostbite', health=100, attack=10, defense=6, active_ability='Ice Blast', passive_ability='Freeze Aura'),
+        Monster(name='Radiant', health=120, attack=11, defense=7, active_ability='Solar Flare', passive_ability='Light Heal'),
+        Monster(name='Shadow', health=110, attack=13, defense=5, active_ability='Nightmare', passive_ability='Dark Veil')
+    ]
+
+    db.session.bulk_save_objects(monsters)
+    db.session.commit()
 
 
 @app.route('/')
