@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Game</title>
+    <title>Auto-Battler Game</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to EleMon!</h1>
-        <button id="start-game">Start Game</button>
+        <h1>Welcome to the Auto-Battler Game</h1>
+        <form action="{{ url_for('create_monster') }}">
+            <button type="submit">Create Monster</button>
+        </form>
+        <form action="{{ url_for('battle') }}">
+            <button type="submit">Go to Battle</button>
+        </form>
+
+        <h2>Created Monsters</h2>
+        <ul>
+            {% for monster in monsters %}
+                <li>{{ monster.name }} - Health: {{ monster.health }}, Attack: {{ monster.attack }}, Defense: {{ monster.defense }}, Active Ability: {{ monster.active_ability }}, Passive Ability: {{ monster.passive_ability }}</li>
+            {% endfor %}
+        </ul>
     </div>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

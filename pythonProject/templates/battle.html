@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Battle</h1>
+        <button id="start-battle">Start Battle</button>
+
+        <div class="battle-visuals">
+            <div class="monster-visual">
+                <img id="monster1-img" src="{{ url_for('static', filename='images/monster1.png') }}" alt="Monster 1">
+                <div class="health-bar">
+                    <div id="monster1-health" class="health"></div>
+                </div>
+            </div>
+            <div class="monster-visual">
+                <img id="monster2-img" src="{{ url_for('static', filename='images/monster2.png') }}" alt="Monster 2">
+                <div class="health-bar">
+                    <div id="monster2-health" class="health"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="battle-logs">
+            <div id="battle-log-monster1" class="battle-log">
+                <h2>Monster 1 Actions</h2>
+            </div>
+            <div id="battle-log-monster2" class="battle-log">
+                <h2>Monster 2 Actions</h2>
+            </div>
+        </div>
+
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+    <script src="{{ url_for('static', filename='js/battle.js') }}"></script>
+</body>
+</html>
